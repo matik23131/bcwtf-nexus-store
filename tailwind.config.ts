@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,6 +60,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Gaming theme colors
+        'neon-pink': "hsl(var(--neon-pink))",
+        'neon-pink-glow': "hsl(var(--neon-pink-glow))",
+        'cyber-purple': "hsl(var(--cyber-purple))",
+        'electric-blue': "hsl(var(--electric-blue))",
+        'dark-surface': "hsl(var(--dark-surface))",
+        'darker-surface': "hsl(var(--darker-surface))",
       },
       borderRadius: {
         lg: "var(--radius)",
