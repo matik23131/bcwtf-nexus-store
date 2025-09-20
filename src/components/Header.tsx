@@ -1,63 +1,107 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, User, Menu, Search } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { Shield, Menu, X, User, Settings } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+
   return (
-    <header className="w-full bg-darker-surface border-b border-neon-pink/20 sticky top-0 z-50 backdrop-blur-md">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center space-x-8">
-            <div className="font-poppins font-black text-2xl lg:text-3xl">
-              <span className="text-white">bc.</span>
-              <span className="text-neon-pink glow-text">wtf</span>
-            </div>
-            
-            {/* Navigation */}
-            <nav className="hidden md:flex items-center space-x-6">
-              <a href="#cheats" className="text-muted-foreground hover:text-neon-pink transition-colors">
-                Cheats
-              </a>
-              <a href="#categories" className="text-muted-foreground hover:text-neon-pink transition-colors">
-                Categories
-              </a>
-              <a href="#support" className="text-muted-foreground hover:text-neon-pink transition-colors">
-                Support
-              </a>
-              <a href="#about" className="text-muted-foreground hover:text-neon-pink transition-colors">
-                About
-              </a>
-            </nav>
+    <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <Link to="/" className="flex items-center space-x-2">
+            <Shield className="h-8 w-8 text-primary" />
+            <span className="text-xl font-bold">Fortnite Spoofer Store</span>
+          </Link>
+          
+          <nav className="hidden md:flex items-center space-x-8">
+            <a href="#home" className="text-foreground hover:text-primary transition-colors">Home</a>
+            <a href="#products" className="text-foreground hover:text-primary transition-colors">Spoofers</a>
+            <a href="#features" className="text-foreground hover:text-primary transition-colors">Features</a>
+            <a href="#support" className="text-foreground hover:text-primary transition-colors">Support</a>
+          </nav>
+
+          <div className="hidden md:flex items-center space-x-4">
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    {user.email}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="flex items-center gap-2">
+                      <Settings className="h-4 w-4" />
+                      Admin Panel
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={signOut}>
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Button variant="ghost" asChild>
+                  <Link to="/auth">Sign In</Link>
+                </Button>
+                <Button asChild>
+                  <Link to="/auth">Get Started</Link>
+                </Button>
+              </>
+            )}
           </div>
 
-          {/* Search & Actions */}
-          <div className="flex items-center space-x-4">
-            <div className="hidden lg:flex items-center bg-dark-surface border border-neon-pink/30 rounded-lg px-3 py-2">
-              <Search className="w-4 h-4 text-muted-foreground mr-2" />
-              <input 
-                type="text" 
-                placeholder="Search cheats..." 
-                className="bg-transparent text-sm text-white placeholder:text-muted-foreground border-none outline-none w-40"
-              />
-            </div>
-            
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 bg-neon-pink text-black text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                0
-              </span>
-            </Button>
-            
-            <Button variant="cyber" size="sm">
-              <User className="w-4 h-4 mr-2" />
-              Login
-            </Button>
-            
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="w-5 h-5" />
-            </Button>
-          </div>
+          <button
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-border/40">
+            <nav className="flex flex-col space-y-4">
+              <a href="#home" className="text-foreground hover:text-primary transition-colors">Home</a>
+              <a href="#products" className="text-foreground hover:text-primary transition-colors">Spoofers</a>
+              <a href="#features" className="text-foreground hover:text-primary transition-colors">Features</a>
+              <a href="#support" className="text-foreground hover:text-primary transition-colors">Support</a>
+              <div className="flex flex-col space-y-2 pt-4">
+                {user ? (
+                  <>
+                    <Link to="/admin">
+                      <Button variant="ghost" className="w-full">Admin Panel</Button>
+                    </Link>
+                    <Button variant="ghost" onClick={signOut} className="w-full">Sign Out</Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/auth">
+                      <Button variant="ghost" className="w-full">Sign In</Button>
+                    </Link>
+                    <Link to="/auth">
+                      <Button className="w-full">Get Started</Button>
+                    </Link>
+                  </>
+                )}
+              </div>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );

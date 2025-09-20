@@ -12,6 +12,8 @@ interface ProductCardProps {
   users: string;
   status: "undetected" | "updated" | "new";
   features: string[];
+  antiCheatCompatibility?: string[];
+  isPermanent?: boolean;
 }
 
 const ProductCard = ({ 
@@ -23,19 +25,21 @@ const ProductCard = ({
   rating, 
   users, 
   status, 
-  features 
+  features,
+  antiCheatCompatibility = [],
+  isPermanent = false
 }: ProductCardProps) => {
   const getStatusVariant = (status: string) => {
     switch(status) {
-      case "undetected": return "bg-green-500/20 text-green-400 border-green-500/50";
-      case "updated": return "bg-neon-pink/20 text-neon-pink border-neon-pink/50";
-      case "new": return "bg-electric-blue/20 text-electric-blue border-electric-blue/50";
-      default: return "bg-neon-pink/20 text-neon-pink border-neon-pink/50";
+      case "undetected": return "bg-green-500/20 text-green-500 border-green-500/50";
+      case "updated": return "bg-blue-500/20 text-blue-500 border-blue-500/50";
+      case "new": return "bg-purple-500/20 text-purple-500 border-purple-500/50";
+      default: return "bg-green-500/20 text-green-500 border-green-500/50";
     }
   };
 
   return (
-    <div className="gradient-card rounded-xl p-6 border border-neon-pink/20 hover-glow transition-glow group">
+    <div className="bg-card rounded-xl p-6 border border-border hover:border-primary/50 transition-colors group shadow-lg">
       {/* Image */}
       <div className="relative mb-4 overflow-hidden rounded-lg">
         <img 
@@ -43,15 +47,15 @@ const ProductCard = ({
           alt={title}
           className="w-full h-48 object-cover transition-transform group-hover:scale-105"
         />
-        <div className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-semibold border ${getStatusVariant(status)}`}>
+        <Badge className={`absolute top-3 right-3 ${getStatusVariant(status)}`}>
           {status.toUpperCase()}
-        </div>
+        </Badge>
       </div>
 
       {/* Content */}
       <div className="space-y-4">
         <div>
-          <h3 className="text-xl font-bold text-white mb-2 font-poppins">{title}</h3>
+          <h3 className="text-xl font-bold text-foreground mb-2">{title}</h3>
           <p className="text-muted-foreground text-sm">{description}</p>
         </div>
 
@@ -59,7 +63,7 @@ const ProductCard = ({
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center space-x-1">
             <Star className="w-4 h-4 text-yellow-400 fill-current" />
-            <span className="text-white font-semibold">{rating}</span>
+            <span className="text-foreground font-semibold">{rating}</span>
           </div>
           <div className="flex items-center space-x-1 text-muted-foreground">
             <Users className="w-4 h-4" />
@@ -67,11 +71,32 @@ const ProductCard = ({
           </div>
         </div>
 
+        {isPermanent && (
+          <div className="mb-3">
+            <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20">
+              Permanent License
+            </Badge>
+          </div>
+        )}
+
+        {antiCheatCompatibility.length > 0 && (
+          <div className="mb-3">
+            <h4 className="text-sm font-medium mb-2 text-muted-foreground">Anti-Cheat Bypass:</h4>
+            <div className="flex flex-wrap gap-1">
+              {antiCheatCompatibility.map((ac, index) => (
+                <Badge key={index} variant="secondary" className="text-xs">
+                  {ac}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Features */}
         <div className="space-y-1">
           {features.slice(0, 3).map((feature, index) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
-              <Shield className="w-3 h-3 text-neon-pink" />
+              <Shield className="w-3 h-3 text-primary" />
               <span className="text-muted-foreground">{feature}</span>
             </div>
           ))}
@@ -81,14 +106,14 @@ const ProductCard = ({
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold text-neon-pink font-poppins">{price}</span>
+              <span className="text-2xl font-bold text-primary">{price}</span>
               {originalPrice && (
                 <span className="text-sm text-muted-foreground line-through">{originalPrice}</span>
               )}
             </div>
-            <span className="text-xs text-muted-foreground">per month</span>
+            <span className="text-xs text-muted-foreground">one-time</span>
           </div>
-          <Button variant="neon" size="sm">
+          <Button size="sm">
             Purchase
           </Button>
         </div>

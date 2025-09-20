@@ -14,13 +14,164 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      analytics: {
+        Row: {
+          created_at: string
+          event_data: Json | null
+          event_type: string
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          license_key: string | null
+          payment_method: string | null
+          payment_status: string | null
+          product_id: string
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          license_key?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
+          product_id: string
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          license_key?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
+          product_id?: string
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          anti_cheat_compatibility: string[] | null
+          category: string
+          created_at: string
+          description: string | null
+          detection_status: string | null
+          features: string[] | null
+          id: string
+          image_url: string | null
+          is_permanent: boolean | null
+          name: string
+          price: number
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          anti_cheat_compatibility?: string[] | null
+          category: string
+          created_at?: string
+          description?: string | null
+          detection_status?: string | null
+          features?: string[] | null
+          id?: string
+          image_url?: string | null
+          is_permanent?: boolean | null
+          name: string
+          price: number
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          anti_cheat_compatibility?: string[] | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          detection_status?: string | null
+          features?: string[] | null
+          id?: string
+          image_url?: string | null
+          is_permanent?: boolean | null
+          name?: string
+          price?: number
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          role: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          role?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          role?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
