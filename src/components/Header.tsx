@@ -31,10 +31,10 @@ const Header = () => {
           </Link>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-foreground hover:text-primary transition-colors">Home</a>
-            <a href="#products" className="text-foreground hover:text-primary transition-colors">Spoofers</a>
-            <a href="#features" className="text-foreground hover:text-primary transition-colors">Features</a>
-            <a href="#support" className="text-foreground hover:text-primary transition-colors">Support</a>
+            <a href="#home" className="text-foreground hover:text-neon-pink transition-colors font-medium">Home</a>
+            <a href="#products" className="text-foreground hover:text-neon-pink transition-colors font-medium">Products</a>
+            <a href="#proof" className="text-foreground hover:text-neon-pink transition-colors font-medium">Proof</a>
+            <a href="#discord" className="text-foreground hover:text-neon-pink transition-colors font-medium">Discord</a>
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -82,10 +82,10 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border/40">
             <nav className="flex flex-col space-y-4">
-              <a href="#home" className="text-foreground hover:text-primary transition-colors">Home</a>
-              <a href="#products" className="text-foreground hover:text-primary transition-colors">Spoofers</a>
-              <a href="#features" className="text-foreground hover:text-primary transition-colors">Features</a>
-              <a href="#support" className="text-foreground hover:text-primary transition-colors">Support</a>
+              <a href="#home" className="text-foreground hover:text-neon-pink transition-colors font-medium">Home</a>
+              <a href="#products" className="text-foreground hover:text-neon-pink transition-colors font-medium">Products</a>
+              <a href="#proof" className="text-foreground hover:text-neon-pink transition-colors font-medium">Proof</a>
+              <a href="#discord" className="text-foreground hover:text-neon-pink transition-colors font-medium">Discord</a>
               <div className="flex flex-col space-y-2 pt-4">
                 {user ? (
                   <>

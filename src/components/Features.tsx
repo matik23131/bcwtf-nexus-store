@@ -44,11 +44,11 @@ const Features = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 font-poppins">
-            Professional <span className="text-neon-pink glow-text">HWID Spoofing</span>
+          <h2 className="text-4xl lg:text-5xl font-black text-foreground mb-4">
+            WHY CHOOSE <span className="text-neon-pink glow-text">BC.WTF</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Trusted by professionals. Used by thousands. Undetected since 2022.
+            The most trusted spoofer in the community. No bullshit, just results.
           </p>
         </div>
 

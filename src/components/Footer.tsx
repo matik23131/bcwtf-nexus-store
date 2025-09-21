@@ -13,8 +13,8 @@ const Footer = () => {
               <span className="text-neon-pink glow-text">wtf</span>
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
-              The most trusted premium gaming cheats store. Undetected solutions, 
-              instant delivery, and lifetime support for serious gamers.
+              Premium game tools since 2022. Undetected solutions with 
+              lifetime support for serious players.
             </p>
             <div className="flex space-x-4">
               <Button variant="cyber" size="sm">
