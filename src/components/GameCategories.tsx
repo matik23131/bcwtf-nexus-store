@@ -5,41 +5,41 @@ const GameCategories = () => {
   const categories = [
     {
       icon: Cpu,
-      name: "Fortnite Spoofers",
-      description: "Premium HWID spoofers specifically designed for Fortnite with EAC bypass",
-      count: "3+ spoofers",
-      color: "text-primary"
+      name: "HWID Spoofer",
+      description: "Change your hardware IDs to bypass hardware bans completely",
+      count: "$65",
+      color: "text-neon-pink"
     },
     {
       icon: HardDrive,
-      name: "Hardware Spoofing", 
-      description: "Advanced hardware ID spoofing for CPU, GPU, motherboard, and disk serials",
-      count: "8+ features",
-      color: "text-secondary"
+      name: "Registry Cleaner", 
+      description: "Clean traces left by games and anti-cheat systems",
+      count: "$25",
+      color: "text-neon-pink"
     },
     {
       icon: Network,
-      name: "Network Spoofing",
-      description: "MAC address and network adapter spoofing for complete anonymity",
-      count: "5+ tools",
-      color: "text-accent"
+      name: "MAC Spoofer",
+      description: "Instantly change your network adapter MAC address",
+      count: "$15",
+      color: "text-neon-pink"
     },
     {
       icon: Shield,
-      name: "Anti-Cheat Bypass",
-      description: "Specialized tools to bypass EAC, BattlEye, and other anti-cheat systems",
-      count: "4+ bypasses",
-      color: "text-green-500"
+      name: "Full Package",
+      description: "Complete spoofing solution with all tools included",
+      count: "$85",
+      color: "text-neon-pink"
     }
   ];
 
   return (
     <section id="categories" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">Spoofer Categories</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Professional HWID spoofing solutions designed for Fortnite and anti-cheat bypass systems.
+        <div className="text-center mb-12">
+          <h2 className="text-2xl font-bold mb-3">Available Tools</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Individual tools or complete packages for your needs.
           </p>
         </div>
 
@@ -63,11 +63,11 @@ const GameCategories = () => {
                       {category.description}
                     </p>
                     <div className="flex items-center justify-between">
-                      <span className="text-primary font-semibold text-sm">
+                      <span className="text-neon-pink font-bold text-lg">
                         {category.count}
                       </span>
-                      <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">
-                        Browse →
+                      <Button variant="ghost" size="sm" className="text-neon-pink hover:bg-neon-pink/10">
+                        Buy
                       </Button>
                     </div>
                   </div>

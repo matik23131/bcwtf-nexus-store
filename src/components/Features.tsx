@@ -4,38 +4,38 @@ const Features = () => {
   const features = [
     {
       icon: Shield,
-      title: "EAC/BE Bypass",
-      description: "Bypasses EasyAntiCheat, BattlEye, Vanguard and all major anti-cheat systems.",
+      title: "Undetected",
+      description: "Working since 2022 with regular updates.",
       color: "text-neon-pink"
     },
     {
       icon: Clock,
-      title: "Permanent License",
-      description: "One-time payment. Use forever. No monthly subscriptions or hidden fees.",
+      title: "Lifetime License",
+      description: "Pay once, use forever. No subscriptions.",
       color: "text-neon-pink"
     },
     {
       icon: Headphones,
-      title: "Professional Support",
-      description: "Direct Discord support. Real people, not bots. Average response time: 5 minutes.",
+      title: "Discord Support",
+      description: "Get help in our active Discord community.",
       color: "text-neon-pink"
     },
     {
       icon: Download,
-      title: "Instant Setup",
-      description: "Download and run. Works in under 30 seconds. No complex installation required.",
+      title: "Easy Setup",
+      description: "Download, run, done. Takes under a minute.",
       color: "text-neon-pink"
     },
     {
       icon: Lock,
-      title: "HWID Protection",
-      description: "Complete hardware fingerprint masking. Safe from any hardware-based detection.",
+      title: "All Games",
+      description: "Works with Fortnite, Apex, Warzone and more.",
       color: "text-neon-pink"
     },
     {
       icon: Star,
-      title: "2+ Years Undetected",
-      description: "Continuously updated. Never detected. Thousands of satisfied customers.",
+      title: "Proven Results",
+      description: "15,000+ active users trust our tools.",
       color: "text-neon-pink"
     }
   ];
@@ -43,12 +43,12 @@ const Features = () => {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-black text-foreground mb-4">
-            WHY CHOOSE <span className="text-neon-pink glow-text">BC.WTF</span>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            Why Choose Us
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            The most trusted spoofer in the community. No bullshit, just results.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            Reliable tools with proven track record.
           </p>
         </div>
 

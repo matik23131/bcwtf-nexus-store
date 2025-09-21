@@ -64,12 +64,12 @@ const FeaturedProducts = () => {
   return (
     <section id="cheats" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-black text-foreground mb-4">
-            PREMIUM <span className="text-neon-pink glow-text">SPOOFERS</span>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            Products
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Professional HWID spoofing tools. Trusted by 50,000+ users worldwide.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            Professional tools with lifetime licenses.
           </p>
         </div>
 

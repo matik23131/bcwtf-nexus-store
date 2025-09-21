@@ -13,8 +13,7 @@ const Footer = () => {
               <span className="text-neon-pink glow-text">wtf</span>
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
-              Premium game tools since 2022. Undetected solutions with 
-              lifetime support for serious players.
+              HWID spoofing tools since 2022. Lifetime licenses with Discord support.
             </p>
             <div className="flex space-x-4">
               <Button variant="cyber" size="sm">
@@ -34,11 +33,10 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-4 font-poppins">Products</h3>
             <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#" className="hover:text-neon-pink transition-colors">FPS Cheats</a></li>
-              <li><a href="#" className="hover:text-neon-pink transition-colors">Battle Royale</a></li>
-              <li><a href="#" className="hover:text-neon-pink transition-colors">MMO Bots</a></li>
-              <li><a href="#" className="hover:text-neon-pink transition-colors">MOBA Scripts</a></li>
-              <li><a href="#" className="hover:text-neon-pink transition-colors">Racing Mods</a></li>
+              <li><a href="#" className="hover:text-neon-pink transition-colors">HWID Spoofer</a></li>
+              <li><a href="#" className="hover:text-neon-pink transition-colors">Registry Cleaner</a></li>
+              <li><a href="#" className="hover:text-neon-pink transition-colors">MAC Spoofer</a></li>
+              <li><a href="#" className="hover:text-neon-pink transition-colors">Full Package</a></li>
             </ul>
           </div>
 
@@ -46,11 +44,10 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-4 font-poppins">Support</h3>
             <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#" className="hover:text-neon-pink transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-neon-pink transition-colors">Installation Guide</a></li>
+              <li><a href="#" className="hover:text-neon-pink transition-colors">Discord</a></li>
+              <li><a href="#" className="hover:text-neon-pink transition-colors">Setup Guide</a></li>
               <li><a href="#" className="hover:text-neon-pink transition-colors">FAQ</a></li>
-              <li><a href="#" className="hover:text-neon-pink transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-neon-pink transition-colors">Discord Support</a></li>
+              <li><a href="#" className="hover:text-neon-pink transition-colors">Contact</a></li>
             </ul>
           </div>
         </div>
@@ -59,7 +56,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 text-muted-foreground mb-4 md:mb-0">
               <Shield className="w-4 h-4 text-green-400" />
-              <span className="text-sm">All products are undetected and regularly updated</span>
+              <span className="text-sm">Undetected since 2022 - regularly updated</span>
             </div>
             <div className="text-sm text-muted-foreground">
               © 2024 bc.wtf - Premium Gaming Solutions
