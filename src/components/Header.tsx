@@ -20,11 +20,13 @@ const Header = () => {
     <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center space-x-3">
-            <img src={bcLogo} alt="bc.wtf" className="h-10 w-10" />
+          <Link to="/" className="flex items-center">
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-neon-pink">bc.wtf</span>
-              <span className="text-xs text-muted-foreground -mt-1">Fortnite Spoofers</span>
+              <div className="text-2xl font-bold">
+                <span className="text-foreground">bc</span>
+                <span className="text-neon-pink glow-text">.wtf</span>
+              </div>
+              <span className="text-xs text-muted-foreground -mt-1">Premium Game Tools</span>
             </div>
           </Link>
           
