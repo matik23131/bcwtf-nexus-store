@@ -4,39 +4,39 @@ const Features = () => {
   const features = [
     {
       icon: Shield,
-      title: "100% Undetected",
-      description: "Advanced anti-cheat bypass technology keeps you safe from all detection systems.",
-      color: "text-green-400"
+      title: "EAC/BE Bypass",
+      description: "Bypasses EasyAntiCheat, BattlEye, Vanguard and all major anti-cheat systems.",
+      color: "text-neon-pink"
     },
     {
       icon: Clock,
-      title: "Instant Delivery",
-      description: "Get your cheats immediately after purchase. No waiting, no delays.",
+      title: "Permanent License",
+      description: "One-time payment. Use forever. No monthly subscriptions or hidden fees.",
       color: "text-neon-pink"
     },
     {
       icon: Headphones,
-      title: "24/7 Support",
-      description: "Our expert team is always ready to help you with any questions or issues.",
-      color: "text-blue-400"
+      title: "Professional Support",
+      description: "Direct Discord support. Real people, not bots. Average response time: 5 minutes.",
+      color: "text-neon-pink"
     },
     {
       icon: Download,
-      title: "Lifetime Updates",
-      description: "Free updates for as long as you're subscribed. Always stay ahead of patches.",
-      color: "text-purple-400"
+      title: "Instant Setup",
+      description: "Download and run. Works in under 30 seconds. No complex installation required.",
+      color: "text-neon-pink"
     },
     {
       icon: Lock,
-      title: "Secure & Private",
-      description: "Your data is encrypted and protected. We never share your information.",
-      color: "text-orange-400"
+      title: "HWID Protection",
+      description: "Complete hardware fingerprint masking. Safe from any hardware-based detection.",
+      color: "text-neon-pink"
     },
     {
       icon: Star,
-      title: "Premium Quality",
-      description: "Only the highest quality cheats make it to our store. Tested and verified.",
-      color: "text-yellow-400"
+      title: "2+ Years Undetected",
+      description: "Continuously updated. Never detected. Thousands of satisfied customers.",
+      color: "text-neon-pink"
     }
   ];
 
@@ -45,10 +45,10 @@ const Features = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 font-poppins">
-            Why Choose <span className="text-neon-pink glow-text">bc.wtf</span>?
+            Professional <span className="text-neon-pink glow-text">HWID Spoofing</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            We're the most trusted name in gaming cheats, with thousands of satisfied customers worldwide.
+            Trusted by professionals. Used by thousands. Undetected since 2022.
           </p>
         </div>
 

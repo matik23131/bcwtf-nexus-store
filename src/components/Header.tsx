@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { Shield, Menu, X, User, Settings } from "lucide-react";
+import { Menu, X, User, Settings } from "lucide-react";
+import bcLogo from "@/assets/bc-wtf-logo.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,9 +20,12 @@ const Header = () => {
     <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center space-x-2">
-            <Shield className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">Fortnite Spoofer Store</span>
+          <Link to="/" className="flex items-center space-x-3">
+            <img src={bcLogo} alt="bc.wtf" className="h-10 w-10" />
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-neon-pink">bc.wtf</span>
+              <span className="text-xs text-muted-foreground -mt-1">Fortnite Spoofers</span>
+            </div>
           </Link>
           
           <nav className="hidden md:flex items-center space-x-8">
