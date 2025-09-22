@@ -39,27 +39,27 @@ const ProductCard = ({
   };
 
   return (
-    <div className="bg-card rounded-lg p-5 border border-border hover:border-primary/50 transition-colors group">
+    <div className="bg-card rounded-lg p-8 border border-border hover:border-primary/50 transition-colors group">
       {/* Image */}
-      <div className="relative mb-4 overflow-hidden rounded-lg">
+      <div className="relative mb-6 overflow-hidden rounded-lg">
         <img 
           src={image} 
           alt={title}
-          className="w-full h-40 object-cover transition-transform group-hover:scale-105"
+          className="w-full h-56 object-cover transition-transform group-hover:scale-105"
         />
-        <Badge className={`absolute top-2 right-2 text-xs ${getStatusVariant(status)}`}>
+        <Badge className={`absolute top-3 right-3 ${getStatusVariant(status)}`}>
           {status.toUpperCase()}
         </Badge>
       </div>
 
       {/* Content */}
-      <div className="space-y-3">
-        <h3 className="text-lg font-bold text-foreground">{title}</h3>
+      <div className="space-y-4">
+        <h3 className="text-xl font-bold text-foreground">{title}</h3>
 
         {/* Pricing */}
         <div className="flex items-center justify-between">
-          <span className="text-xl font-bold text-primary">{price}</span>
-          <Button size="sm">
+          <span className="text-2xl font-bold text-primary">{price}</span>
+          <Button size="default">
             Buy Now
           </Button>
         </div>
