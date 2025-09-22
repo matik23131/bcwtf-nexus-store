@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star, Shield, Users } from "lucide-react";
-import PurchaseDialog from "./PurchaseDialog";
+import ProductDetailView from "./ProductDetailView";
 
 interface ProductCardProps {
   title: string;
@@ -31,7 +31,7 @@ const ProductCard = ({
   antiCheatCompatibility = [],
   isPermanent = false
 }: ProductCardProps) => {
-  const [showPurchaseDialog, setShowPurchaseDialog] = useState(false);
+  const [showProductDetail, setShowProductDetail] = useState(false);
 
   const getStatusVariant = (status: string) => {
     switch(status) {
@@ -41,6 +41,15 @@ const ProductCard = ({
       default: return "bg-green-500/20 text-green-500 border-green-500/50";
     }
   };
+
+  if (showProductDetail) {
+    return (
+      <ProductDetailView 
+        product={{ title, price, image, status }}
+        onBack={() => setShowProductDetail(false)}
+      />
+    );
+  }
 
   return (
     <div className="bg-card rounded-lg p-8 border border-border hover:border-primary/50 transition-colors group">
@@ -63,18 +72,11 @@ const ProductCard = ({
         {/* Pricing */}
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-primary">{price}</span>
-          <Button size="default" onClick={() => setShowPurchaseDialog(true)}>
+          <Button size="default" onClick={() => setShowProductDetail(true)}>
             Buy Now
           </Button>
         </div>
       </div>
-
-      <PurchaseDialog 
-        open={showPurchaseDialog}
-        onOpenChange={setShowPurchaseDialog}
-        productTitle={title}
-        price={price}
-      />
     </div>
   );
 };
