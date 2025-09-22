@@ -39,82 +39,42 @@ const ProductCard = ({
   };
 
   return (
-    <div className="bg-card rounded-xl p-6 border border-border hover:border-primary/50 transition-colors group shadow-lg">
+    <div className="bg-card rounded-lg p-4 border border-border hover:border-primary/50 transition-colors group">
       {/* Image */}
-      <div className="relative mb-4 overflow-hidden rounded-lg">
+      <div className="relative mb-3 overflow-hidden rounded-lg">
         <img 
           src={image} 
           alt={title}
-          className="w-full h-48 object-cover transition-transform group-hover:scale-105"
+          className="w-full h-32 object-cover transition-transform group-hover:scale-105"
         />
-        <Badge className={`absolute top-3 right-3 ${getStatusVariant(status)}`}>
+        <Badge className={`absolute top-2 right-2 text-xs ${getStatusVariant(status)}`}>
           {status.toUpperCase()}
         </Badge>
       </div>
 
       {/* Content */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         <div>
-          <h3 className="text-xl font-bold text-foreground mb-2">{title}</h3>
-          <p className="text-muted-foreground text-sm">{description}</p>
-        </div>
-
-        {/* Stats */}
-        <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center space-x-1">
-            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-            <span className="text-foreground font-semibold">{rating}</span>
-          </div>
-          <div className="flex items-center space-x-1 text-muted-foreground">
-            <Users className="w-4 h-4" />
-            <span>{users} users</span>
-          </div>
+          <h3 className="text-lg font-bold text-foreground mb-1">{title}</h3>
+          <p className="text-muted-foreground text-xs line-clamp-2">{description}</p>
         </div>
 
         {isPermanent && (
-          <div className="mb-3">
-            <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20">
-              Permanent License
-            </Badge>
-          </div>
+          <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">
+            Lifetime
+          </Badge>
         )}
-
-        {antiCheatCompatibility.length > 0 && (
-          <div className="mb-3">
-            <h4 className="text-sm font-medium mb-2 text-muted-foreground">Anti-Cheat Bypass:</h4>
-            <div className="flex flex-wrap gap-1">
-              {antiCheatCompatibility.map((ac, index) => (
-                <Badge key={index} variant="secondary" className="text-xs">
-                  {ac}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Features */}
-        <div className="space-y-1">
-          {features.slice(0, 3).map((feature, index) => (
-            <div key={index} className="flex items-center space-x-2 text-sm">
-              <Shield className="w-3 h-3 text-primary" />
-              <span className="text-muted-foreground">{feature}</span>
-            </div>
-          ))}
-        </div>
 
         {/* Pricing */}
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold text-primary">{price}</span>
-              {originalPrice && (
-                <span className="text-sm text-muted-foreground line-through">{originalPrice}</span>
-              )}
-            </div>
-            <span className="text-xs text-muted-foreground">one-time</span>
+        <div className="flex items-center justify-between pt-2">
+          <div className="flex items-center space-x-2">
+            <span className="text-xl font-bold text-primary">{price}</span>
+            {originalPrice && (
+              <span className="text-xs text-muted-foreground line-through">{originalPrice}</span>
+            )}
           </div>
-          <Button size="sm">
-            Purchase
+          <Button size="sm" className="text-xs">
+            Buy Now
           </Button>
         </div>
       </div>
