@@ -74,10 +74,10 @@ const FeaturedProducts = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <ProductCard
               key={product.id}
-              title={product.name}
+              title={index === 0 ? "Fortnite Ext Temp Spoofer" : product.name}
               description={product.description}
               price={`$${product.price}`}
               image={product.image_url}
