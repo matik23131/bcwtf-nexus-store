@@ -39,13 +39,13 @@ const ProductCard = ({
   };
 
   return (
-    <div className="bg-card rounded-lg p-4 border border-border hover:border-primary/50 transition-colors group">
+    <div className="bg-card rounded-lg p-5 border border-border hover:border-primary/50 transition-colors group">
       {/* Image */}
-      <div className="relative mb-3 overflow-hidden rounded-lg">
+      <div className="relative mb-4 overflow-hidden rounded-lg">
         <img 
           src={image} 
           alt={title}
-          className="w-full h-32 object-cover transition-transform group-hover:scale-105"
+          className="w-full h-40 object-cover transition-transform group-hover:scale-105"
         />
         <Badge className={`absolute top-2 right-2 text-xs ${getStatusVariant(status)}`}>
           {status.toUpperCase()}
@@ -54,26 +54,12 @@ const ProductCard = ({
 
       {/* Content */}
       <div className="space-y-3">
-        <div>
-          <h3 className="text-lg font-bold text-foreground mb-1">{title}</h3>
-          <p className="text-muted-foreground text-xs line-clamp-2">{description}</p>
-        </div>
-
-        {isPermanent && (
-          <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">
-            Lifetime
-          </Badge>
-        )}
+        <h3 className="text-lg font-bold text-foreground">{title}</h3>
 
         {/* Pricing */}
-        <div className="flex items-center justify-between pt-2">
-          <div className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-primary">{price}</span>
-            {originalPrice && (
-              <span className="text-xs text-muted-foreground line-through">{originalPrice}</span>
-            )}
-          </div>
-          <Button size="sm" className="text-xs">
+        <div className="flex items-center justify-between">
+          <span className="text-xl font-bold text-primary">{price}</span>
+          <Button size="sm">
             Buy Now
           </Button>
         </div>
