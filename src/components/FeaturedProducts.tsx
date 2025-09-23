@@ -74,18 +74,21 @@ const FeaturedProducts = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ProductCard
-            title="Fortnite Ext Temp Spoofer"
-            description="Advanced external temporary spoofing solution"
-            price="$7.99"
-            image="/src/assets/br-cheats.jpg"
-            rating={4.8}
-            users="2.5k"
-            status="undetected"
-            features={["External", "Temporary", "Spoofer"]}
-            antiCheatCompatibility={["BattlEye", "EAC"]}
-            isPermanent={false}
-          />
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              title={product.name}
+              description={product.description}
+              price={`$${product.price}`}
+              image={product.image_url || "/src/assets/br-cheats.jpg"}
+              rating={4.8}
+              users="2.5k"
+              status={product.detection_status as "undetected" | "updated" | "new"}
+              features={product.features || []}
+              antiCheatCompatibility={product.anti_cheat_compatibility || []}
+              isPermanent={product.is_permanent}
+            />
+          ))}
         </div>
       </div>
     </section>
