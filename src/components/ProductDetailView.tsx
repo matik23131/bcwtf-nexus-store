@@ -2,23 +2,23 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Plus, Minus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-interface ProductDetailViewProps {
-  product: {
-    title: string;
-    price: string;
-    image: string;
-    status: string;
-  };
-  onBack: () => void;
-}
-
-const ProductDetailView = ({ product, onBack }: ProductDetailViewProps) => {
+const ProductDetailView = () => {
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState("1-day");
 
+  // Static product data for now
+  const product = {
+    title: "Fortnite Ext Temp Spoofer",
+    price: "$7.99",
+    image: "/src/assets/br-cheats.jpg",
+    status: "undetected"
+  };
+
   const pricingPlans = [
-    { id: "1-day", label: "1 DAY", price: "$7.99", popular: true },
+    { id: "1-day", label: "1 DAY", price: "$7.99" },
     { id: "3-day", label: "3 DAY", price: "$15.99" },
     { id: "1-week", label: "1 WEEK", price: "$29.99" },
     { id: "1-month", label: "1 MONTH", price: "$59.99" }
@@ -44,7 +44,7 @@ const ProductDetailView = ({ product, onBack }: ProductDetailViewProps) => {
         {/* Back Button */}
         <Button 
           variant="ghost" 
-          onClick={onBack}
+          onClick={() => navigate('/')}
           className="mb-6 hover:bg-muted"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -86,7 +86,6 @@ const ProductDetailView = ({ product, onBack }: ProductDetailViewProps) => {
               <div className="flex gap-2 mb-4">
                 <Badge variant="secondary">FORTNITE</Badge>
                 <Badge className="bg-green-500/20 text-green-500">INSTANT DELIVERY</Badge>
-                <Badge className="bg-yellow-500/20 text-yellow-500">TESTING</Badge>
               </div>
               <p className="text-2xl font-bold text-primary">{getSelectedPrice()}</p>
             </div>
@@ -119,15 +118,12 @@ const ProductDetailView = ({ product, onBack }: ProductDetailViewProps) => {
                     selectedPlan === plan.id 
                       ? 'border-primary bg-primary/5' 
                       : 'border-muted hover:border-muted-foreground'
-                  } ${plan.popular ? 'bg-primary/10' : ''}`}
+                  }`}
                   onClick={() => setSelectedPlan(plan.id)}
                 >
                   <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3">
                       <span className="font-semibold">{plan.label}</span>
-                      {plan.popular && (
-                        <Badge className="bg-primary text-primary-foreground">POPULAR</Badge>
-                      )}
                     </div>
                     <div className="text-right">
                       <span className="text-lg font-bold">{plan.price}</span>

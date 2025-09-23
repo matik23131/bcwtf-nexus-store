@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, Shield, Users } from "lucide-react";
-import ProductDetailView from "./ProductDetailView";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   title: string;
@@ -31,7 +29,7 @@ const ProductCard = ({
   antiCheatCompatibility = [],
   isPermanent = false
 }: ProductCardProps) => {
-  const [showProductDetail, setShowProductDetail] = useState(false);
+  const navigate = useNavigate();
 
   const getStatusVariant = (status: string) => {
     switch(status) {
@@ -41,15 +39,6 @@ const ProductCard = ({
       default: return "bg-green-500/20 text-green-500 border-green-500/50";
     }
   };
-
-  if (showProductDetail) {
-    return (
-      <ProductDetailView 
-        product={{ title, price, image, status }}
-        onBack={() => setShowProductDetail(false)}
-      />
-    );
-  }
 
   return (
     <div className="bg-card rounded-lg p-8 border border-border hover:border-primary/50 transition-colors group">
@@ -72,7 +61,7 @@ const ProductCard = ({
         {/* Pricing */}
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-primary">{price}</span>
-          <Button size="default" onClick={() => setShowProductDetail(true)}>
+          <Button size="default" onClick={() => navigate(`/product/${title.toLowerCase().replace(/\s+/g, '-')}`)}>
             Buy Now
           </Button>
         </div>
