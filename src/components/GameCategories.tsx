@@ -1,31 +1,27 @@
 import { Button } from "@/components/ui/button";
-import { Cpu, Shield, Network, HardDrive } from "lucide-react";
+// Icons removed
 
 const GameCategories = () => {
   const categories = [
     {
-      icon: Cpu,
       name: "HWID Spoofer",
       description: "Change your hardware IDs to bypass hardware bans completely",
       count: "$65",
       color: "text-neon-pink"
     },
     {
-      icon: HardDrive,
       name: "Registry Cleaner", 
       description: "Clean traces left by games and anti-cheat systems",
       count: "$25",
       color: "text-neon-pink"
     },
     {
-      icon: Network,
       name: "MAC Spoofer",
       description: "Instantly change your network adapter MAC address",
       count: "$15",
       color: "text-neon-pink"
     },
     {
-      icon: Shield,
       name: "Full Package",
       description: "Complete spoofing solution with all tools included",
       count: "$85",
@@ -45,7 +41,6 @@ const GameCategories = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => {
-            const IconComponent = category.icon;
             return (
               <div 
                 key={index}
@@ -53,7 +48,7 @@ const GameCategories = () => {
               >
                 <div className="text-center space-y-4">
                   <div className={`p-3 rounded-lg bg-background ${category.color} mx-auto w-fit`}>
-                    <IconComponent className="w-8 h-8" />
+                    <div className="w-8 h-8 bg-neon-pink/20 rounded"></div>
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">

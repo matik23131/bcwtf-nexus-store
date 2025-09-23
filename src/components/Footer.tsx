@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Mail, Shield, Users } from "lucide-react";
+// Icons removed
 
 const Footer = () => {
   return (
@@ -17,14 +17,13 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <Button variant="cyber" size="sm">
-                <Users className="w-4 h-4 mr-2" />
                 Discord
               </Button>
               <Button variant="ghost" size="sm">
-                <MessageCircle className="w-4 h-4" />
+                Contact
               </Button>
               <Button variant="ghost" size="sm">
-                <Mail className="w-4 h-4" />
+                Support
               </Button>
             </div>
           </div>
@@ -55,7 +54,6 @@ const Footer = () => {
         <div className="border-t border-neon-pink/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 text-muted-foreground mb-4 md:mb-0">
-              <Shield className="w-4 h-4 text-green-400" />
               <span className="text-sm">Undetected since 2022 - regularly updated</span>
             </div>
             <div className="text-sm text-muted-foreground">

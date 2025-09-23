@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Plus, Minus } from "lucide-react";
+// Icons removed
 import { useNavigate } from "react-router-dom";
 
 const ProductDetailView = () => {
@@ -47,8 +47,7 @@ const ProductDetailView = () => {
           onClick={() => navigate('/')}
           className="mb-6 hover:bg-muted"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Products
+          ← Back to Products
         </Button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -97,7 +96,7 @@ const ProductDetailView = () => {
                 size="sm"
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
               >
-                <Minus className="w-4 h-4" />
+                −
               </Button>
               <span className="text-lg font-semibold w-8 text-center">{quantity}</span>
               <Button 
@@ -105,7 +104,7 @@ const ProductDetailView = () => {
                 size="sm"
                 onClick={() => setQuantity(quantity + 1)}
               >
-                <Plus className="w-4 h-4" />
+                +
               </Button>
             </div>
 

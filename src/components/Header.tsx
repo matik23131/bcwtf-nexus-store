@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { Menu, X, User, Settings } from "lucide-react";
+// Icons removed
 import bcLogo from "@/assets/bc-wtf-logo.png";
 import {
   DropdownMenu,
@@ -42,14 +42,12 @@ const Header = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="flex items-center gap-2">
-                    <User className="h-4 w-4" />
                     {user.email}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem asChild>
                     <Link to="/admin" className="flex items-center gap-2">
-                      <Settings className="h-4 w-4" />
                       Admin Panel
                     </Link>
                   </DropdownMenuItem>
@@ -75,7 +73,7 @@ const Header = () => {
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? "✕" : "☰"}
           </button>
         </div>
 

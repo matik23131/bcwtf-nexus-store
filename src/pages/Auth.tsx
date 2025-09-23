@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { Shield, Lock, User } from "lucide-react";
+// Icons removed
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -72,14 +72,11 @@ const Auth = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
-          <div className="flex items-center justify-center mb-4">
-            <Shield className="h-12 w-12 text-primary" />
-          </div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
             Fortnite Spoofer Store
           </h1>
           <p className="text-muted-foreground">
-            Access premium HWID spoofers and EAC bypass tools
+            Access HWID spoofers and EAC bypass tools
           </p>
         </div>
 
@@ -93,12 +90,10 @@ const Auth = () => {
           <CardContent>
             <Tabs defaultValue="signin" className="space-y-4">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="signin" className="flex items-center gap-2">
-                  <Lock className="h-4 w-4" />
+                <TabsTrigger value="signin">
                   Sign In
                 </TabsTrigger>
-                <TabsTrigger value="signup" className="flex items-center gap-2">
-                  <User className="h-4 w-4" />
+                <TabsTrigger value="signup">
                   Sign Up
                 </TabsTrigger>
               </TabsList>
