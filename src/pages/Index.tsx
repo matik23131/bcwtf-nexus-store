@@ -1,21 +1,19 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import FeaturedProducts from "@/components/FeaturedProducts";
-import GameCategories from "@/components/GameCategories";
-import Features from "@/components/Features";
-import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
-        <Hero />
-        <FeaturedProducts />
-        <GameCategories />
-        <Features />
+      <main className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-foreground mb-4">
+            Welcome to BC.WTF
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            Premium Game Tools Platform
+          </p>
+        </div>
       </main>
-      <Footer />
     </div>
   );
 };
