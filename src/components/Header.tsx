@@ -21,9 +21,9 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
-            <div className="text-2xl font-bold">
-              <span className="text-foreground">bc</span>
-              <span className="text-neon-pink glow-text">.wtf</span>
+            <div className="text-2xl font-extrabold font-poppins">
+              <span className="text-foreground">bc.</span>
+              <span className="text-neon-pink glow-text">wtf</span>
             </div>
           </Link>
           
