@@ -9,9 +9,6 @@ const Index = () => {
           <h1 className="text-4xl font-bold text-foreground mb-4">
             Welcome to BC.WTF
           </h1>
-          <p className="text-muted-foreground text-lg">
-            Premium Game Tools Platform
-          </p>
         </div>
       </main>
     </div>
