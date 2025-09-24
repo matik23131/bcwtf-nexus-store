@@ -21,20 +21,25 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
-            <div className="flex flex-col">
-              <div className="text-2xl font-bold">
-                <span className="text-foreground">bc</span>
-                <span className="text-neon-pink glow-text">.wtf</span>
-              </div>
-              <span className="text-xs text-muted-foreground -mt-1">Premium Game Tools</span>
+            <div className="text-2xl font-bold">
+              <span className="text-foreground">bc</span>
+              <span className="text-neon-pink glow-text">.wtf</span>
             </div>
           </Link>
           
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-foreground hover:text-neon-pink transition-colors font-medium">Home</Link>
-            <Link to="/products" className="text-foreground hover:text-neon-pink transition-colors font-medium">Products</Link>
-            <Link to="/status" className="text-foreground hover:text-neon-pink transition-colors font-medium">Status</Link>
-            <Link to="/reviews" className="text-foreground hover:text-neon-pink transition-colors font-medium">Reviews</Link>
+          <nav className="hidden md:flex items-center space-x-2">
+            <Button variant="ghost" asChild>
+              <Link to="/">Home</Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link to="/products">Products</Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link to="/status">Status</Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link to="/reviews">Reviews</Link>
+            </Button>
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -79,11 +84,19 @@ const Header = () => {
 
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border/40">
-            <nav className="flex flex-col space-y-4">
-              <Link to="/" className="text-foreground hover:text-neon-pink transition-colors font-medium">Home</Link>
-              <Link to="/products" className="text-foreground hover:text-neon-pink transition-colors font-medium">Products</Link>
-              <Link to="/status" className="text-foreground hover:text-neon-pink transition-colors font-medium">Status</Link>
-              <Link to="/reviews" className="text-foreground hover:text-neon-pink transition-colors font-medium">Reviews</Link>
+            <nav className="flex flex-col space-y-2">
+              <Button variant="ghost" asChild className="w-full justify-start">
+                <Link to="/">Home</Link>
+              </Button>
+              <Button variant="ghost" asChild className="w-full justify-start">
+                <Link to="/products">Products</Link>
+              </Button>
+              <Button variant="ghost" asChild className="w-full justify-start">
+                <Link to="/status">Status</Link>
+              </Button>
+              <Button variant="ghost" asChild className="w-full justify-start">
+                <Link to="/reviews">Reviews</Link>
+              </Button>
               <div className="flex flex-col space-y-2 pt-4">
                 {user ? (
                   <>
