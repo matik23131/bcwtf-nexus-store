@@ -80,7 +80,7 @@ const FeaturedProducts = () => {
               title={product.name}
               description={product.description}
               price={`$${product.price}`}
-              image={product.image_url || "/src/assets/br-cheats.jpg"}
+              image={product.image_url || "/placeholder.svg"}
               rating={4.8}
               users="2.5k"
               status={product.detection_status as "undetected" | "updated" | "new"}
