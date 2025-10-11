@@ -44,9 +44,9 @@ const ProductCard = ({
   return (
     <div className="bg-card rounded-lg p-8 border border-border hover:border-primary/50 transition-colors group">
       {/* Image */}
-      <div className="relative mb-6 overflow-hidden rounded-lg">
+      <div className="relative mb-6 overflow-hidden rounded-lg bg-card">
         <img 
-          src={image === 'product-box.png' ? productBoxImage : image}
+          src={image === 'product-box.png' || image === '/api/placeholder/400/300' ? productBoxImage : image}
           alt={title}
           className="w-full h-56 object-cover transition-transform group-hover:scale-105"
         />

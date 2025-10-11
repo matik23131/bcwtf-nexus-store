@@ -17,7 +17,7 @@ const PageTransition = ({ children }: PageTransitionProps) => {
       const timer = setTimeout(() => {
         setDisplayLocation(location);
         setIsLoading(false);
-      }, 1000); // 1 second transition
+      }, 4000); // 4 second transition
 
       return () => clearTimeout(timer);
     }
