@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import productBoxImage from "@/assets/product-box.png";
 
 interface ProductCardProps {
   title: string;
@@ -45,7 +46,7 @@ const ProductCard = ({
       {/* Image */}
       <div className="relative mb-6 overflow-hidden rounded-lg">
         <img 
-          src={image} 
+          src={image === 'product-box.png' ? productBoxImage : image}
           alt={title}
           className="w-full h-56 object-cover transition-transform group-hover:scale-105"
         />

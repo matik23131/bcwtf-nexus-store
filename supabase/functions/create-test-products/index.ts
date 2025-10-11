@@ -31,7 +31,7 @@ Deno.serve(async (req) => {
       })
     }
 
-    // Insert test products
+    // Insert test products with the product-box image
     const { data, error } = await supabase
       .from('products')
       .insert([
@@ -42,7 +42,7 @@ Deno.serve(async (req) => {
           category: 'Premium Packages',
           features: ['Aimbot', 'ESP/Wallhack', 'Radar', 'No Recoil', 'Auto Updates'],
           status: 'active',
-          image_url: '/src/assets/product-box.png',
+          image_url: 'product-box.png',
           anti_cheat_compatibility: ['EAC (Easy Anti-Cheat)', 'BattlEye', 'Vanguard'],
           is_permanent: true,
           detection_status: 'undetected'
@@ -54,7 +54,7 @@ Deno.serve(async (req) => {
           category: 'Elite Tools',
           features: ['Advanced Aimbot', 'Player ESP', 'Item ESP', 'Speed Hack', '24/7 Support'],
           status: 'active',
-          image_url: '/src/assets/product-box.png',
+          image_url: 'product-box.png',
           anti_cheat_compatibility: ['EAC (Easy Anti-Cheat)', 'BattlEye'],
           is_permanent: false,
           detection_status: 'updated'
@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
           category: 'Spoofers',
           features: ['HWID Reset', 'MAC Spoofing', 'Disk Serial Change', 'Registry Cleanup', 'Auto Protection'],
           status: 'active',
-          image_url: '/src/assets/product-box.png',
+          image_url: 'product-box.png',
           anti_cheat_compatibility: ['EAC (Easy Anti-Cheat)', 'BattlEye', 'XIGNCODE3'],
           is_permanent: true,
           detection_status: 'undetected'
