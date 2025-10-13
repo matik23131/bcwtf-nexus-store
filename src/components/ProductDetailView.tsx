@@ -11,6 +11,7 @@ const ProductDetailView = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState("1-day");
   const [isAdding, setIsAdding] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   // Static product data for now
   const product = {
@@ -89,17 +90,18 @@ const ProductDetailView = () => {
             
             {/* Thumbnail Images */}
             <div className="flex gap-3">
-              {[1,2,3,4,5].map((i) => (
+              {[0,1,2,3,4].map((i) => (
                 <div 
                   key={i} 
+                  onClick={() => setSelectedImageIndex(i)}
                   className={`flex-1 aspect-square rounded-lg overflow-hidden border-2 ${
-                    i === 1 ? 'border-neon-pink' : 'border-border/40'
+                    selectedImageIndex === i ? 'border-neon-pink' : 'border-border/40'
                   } hover:border-neon-pink/50 transition-all cursor-pointer`}
                 >
                   <img 
                     src={product.image} 
-                    alt={`${product.title} ${i}`}
-                    className="w-full h-full object-cover"
+                    alt={`${product.title} view ${i + 1}`}
+                    className="w-full h-full object-contain p-2"
                   />
                 </div>
               ))}
@@ -115,7 +117,7 @@ const ProductDetailView = () => {
                 <Badge variant="outline" className="border-neon-pink text-neon-pink">FORTNITE</Badge>
                 <Badge className="bg-green-500/20 text-green-400 border border-green-500/50">INSTANT DELIVERY</Badge>
               </div>
-              <p className="text-3xl font-bold text-neon-pink glow-text">{getSelectedPrice()}</p>
+              <p className="text-3xl font-bold text-neon-pink">{getSelectedPrice()}</p>
             </div>
 
             {/* Quantity Selector */}
@@ -171,6 +173,33 @@ const ProductDetailView = () => {
             >
               {isAdding ? "Adding..." : "Add To Cart"}
             </Button>
+
+            {/* Product Description */}
+            <div className="mt-8 space-y-4">
+              <h3 className="text-xl font-bold">Product Description</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Premium hardware ID spoofer designed for Fortnite. Protect your hardware and stay undetected with our advanced spoofing technology. Instant delivery upon purchase.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-4 mt-6">
+                <div className="p-4 rounded-lg bg-card border border-border">
+                  <p className="text-sm text-muted-foreground">Status</p>
+                  <p className="font-bold text-green-400">UNDETECTED</p>
+                </div>
+                <div className="p-4 rounded-lg bg-card border border-border">
+                  <p className="text-sm text-muted-foreground">Delivery</p>
+                  <p className="font-bold">Instant</p>
+                </div>
+                <div className="p-4 rounded-lg bg-card border border-border">
+                  <p className="text-sm text-muted-foreground">Support</p>
+                  <p className="font-bold">24/7</p>
+                </div>
+                <div className="p-4 rounded-lg bg-card border border-border">
+                  <p className="text-sm text-muted-foreground">Updates</p>
+                  <p className="font-bold">Regular</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
