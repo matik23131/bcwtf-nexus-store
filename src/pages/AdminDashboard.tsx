@@ -18,8 +18,10 @@ import {
   Plus,
   Eye,
   Edit,
-  Trash2
+  Trash2,
+  Megaphone
 } from "lucide-react";
+import AdminAnnouncements from "@/components/AdminAnnouncements";
 import {
   Table,
   TableBody,
@@ -217,6 +219,17 @@ const AdminDashboard = () => {
           <BarChart3 className="h-4 w-4" />
           Analytics
         </NavLink>
+        <NavLink
+          to="/admin/announcements"
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
+              isActive ? "bg-primary text-primary-foreground" : "hover:bg-accent"
+            }`
+          }
+        >
+          <Megaphone className="h-4 w-4" />
+          Announcements
+        </NavLink>
       </nav>
 
       <div className="mt-auto pt-8">
@@ -412,6 +425,7 @@ const AdminDashboard = () => {
           <Route path="/orders" element={<div className="p-8"><h1 className="text-3xl font-bold">Orders Management</h1></div>} />
           <Route path="/users" element={<div className="p-8"><h1 className="text-3xl font-bold">Users Management</h1></div>} />
           <Route path="/analytics" element={<div className="p-8"><h1 className="text-3xl font-bold">Analytics</h1></div>} />
+          <Route path="/announcements" element={<div className="p-8"><AdminAnnouncements /></div>} />
         </Routes>
       </div>
     </div>

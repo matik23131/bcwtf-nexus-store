@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +32,32 @@ const ProductCard = ({
   isPermanent = false
 }: ProductCardProps) => {
   const navigate = useNavigate();
+  const [tiltStyle, setTiltStyle] = useState({});
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+    
+    setTiltStyle({
+      transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
+      transition: 'none',
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTiltStyle({
+      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+      transition: 'all 0.5s ease',
+    });
+  };
 
   const getStatusVariant = (status: string) => {
     switch(status) {
@@ -42,7 +69,15 @@ const ProductCard = ({
   };
 
   return (
-    <div className="bg-card rounded-lg p-8 border border-border hover:border-primary/50 transition-colors group">
+    <div 
+      className="bg-card rounded-lg p-8 border border-border hover:border-primary/50 group relative overflow-hidden"
+      style={tiltStyle}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Shader-style lighting overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-neon-pink/5 via-transparent to-electric-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute -inset-1 bg-gradient-to-r from-neon-pink/20 to-electric-blue/20 rounded-lg opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 -z-10" />
       {/* Image */}
       <div className="relative mb-6 overflow-hidden rounded-lg bg-card">
         <img 

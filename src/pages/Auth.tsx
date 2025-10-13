@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-// Icons removed
+import AnimatedBackground from "@/components/AnimatedBackground";
+import SiteProtection from "@/components/SiteProtection";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -70,11 +71,14 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10 flex items-center justify-center p-4">
+      <SiteProtection />
+      <AnimatedBackground />
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">
-            Fortnite Spoofer Store
-          </h1>
+          <div className="text-3xl font-bold tracking-tight flex items-center justify-center gap-2">
+            <span className="text-foreground">bc.</span>
+            <span className="text-neon-pink glow-text">wtf</span>
+          </div>
           <p className="text-muted-foreground">
             Access HWID spoofers and EAC bypass tools
           </p>

@@ -1,9 +1,17 @@
 import Header from "@/components/Header";
+import AnimatedBackground from "@/components/AnimatedBackground";
+import AnnouncementBanner from "@/components/AnnouncementBanner";
+import SiteProtection from "@/components/SiteProtection";
 
 const Status = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SiteProtection />
+      <AnimatedBackground />
       <Header />
+      <div className="container mx-auto px-4 pt-4">
+        <AnnouncementBanner />
+      </div>
       <main className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-foreground mb-4">
