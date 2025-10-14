@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import ProductCard from "./ProductCard";
+import CanvasProductCard from "./CanvasProductCard";
 
 interface Product {
   id: string;
@@ -75,7 +75,7 @@ const FeaturedProducts = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product) => (
-            <ProductCard
+            <CanvasProductCard
               key={product.id}
               title={product.name}
               description={product.description}
@@ -87,6 +87,7 @@ const FeaturedProducts = () => {
               features={product.features || []}
               antiCheatCompatibility={product.anti_cheat_compatibility || []}
               isPermanent={product.is_permanent}
+              stockLeft={Math.floor(Math.random() * 15) + 3} // Simulated stock
             />
           ))}
         </div>
