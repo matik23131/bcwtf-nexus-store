@@ -98,6 +98,32 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
     font-family: 'Poppins', sans-serif;
   }
+
+  /* GPU-accelerated smooth scrolling */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Force GPU acceleration for animations */
+  .animate-float,
+  .animate-gradient,
+  .animate-pulse,
+  [class*="animate-"] {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* High quality image rendering */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 }
 
 @layer utilities {

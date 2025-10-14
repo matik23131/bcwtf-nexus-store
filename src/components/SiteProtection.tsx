@@ -43,8 +43,13 @@ const SiteProtection = () => {
     document.addEventListener('selectstart', handleSelectStart);
     document.addEventListener('dragstart', handleDragStart);
 
-    // Detect DevTools
+    // Detect DevTools - Only on production
     const detectDevTools = () => {
+      // Skip detection in Lovable iframe
+      if (window.location.hostname.includes('lovable.app') || window.location.hostname === 'localhost') {
+        return;
+      }
+      
       const threshold = 160;
       const widthThreshold = window.outerWidth - window.innerWidth > threshold;
       const heightThreshold = window.outerHeight - window.innerHeight > threshold;

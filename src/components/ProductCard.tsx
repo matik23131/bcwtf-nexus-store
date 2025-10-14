@@ -43,12 +43,16 @@ const ProductCard = ({
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
+    const rotateX = -(y - centerY) / 10;
+    const rotateY = (x - centerX) / 10;
+    
+    const glowIntensity = Math.min(Math.abs(rotateX) + Math.abs(rotateY), 20) / 20;
     
     setTiltStyle({
       transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
       transition: 'none',
+      boxShadow: `0 ${Math.abs(rotateX) * 2}px ${30 + Math.abs(rotateX) * 3}px rgba(255, 0, 128, ${0.2 + glowIntensity * 0.3}), 
+                  ${rotateY * 2}px 0 ${30 + Math.abs(rotateY) * 3}px rgba(0, 200, 255, ${0.2 + glowIntensity * 0.3})`,
     });
   };
 
@@ -56,6 +60,7 @@ const ProductCard = ({
     setTiltStyle({
       transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
       transition: 'all 0.5s ease',
+      boxShadow: 'none',
     });
   };
 
@@ -84,7 +89,15 @@ const ProductCard = ({
           src={image === 'product-box.png' || image === '/api/placeholder/400/300' ? productBoxImage : image}
           alt={title}
           className="w-full h-56 object-cover transition-transform group-hover:scale-105"
+          draggable="false"
+          onContextMenu={(e) => e.preventDefault()}
         />
+        {/* Invisible watermark overlay */}
+        <div className="absolute inset-0 pointer-events-none opacity-5 text-[8px] leading-3 overflow-hidden select-none">
+          {[...Array(50)].map((_, i) => (
+            <span key={i} className="text-primary">bc.wtf </span>
+          ))}
+        </div>
         <Badge className={`absolute top-3 right-3 ${getStatusVariant(status)}`}>
           {status.toUpperCase()}
         </Badge>

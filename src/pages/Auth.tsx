@@ -7,8 +7,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import AnimatedBackground from "@/components/AnimatedBackground";
+import LoginAnimation from "@/components/LoginAnimation";
 import SiteProtection from "@/components/SiteProtection";
+import CreateAdminButton from "@/components/CreateAdminButton";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -70,10 +71,10 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10 flex items-center justify-center p-4 relative">
       <SiteProtection />
-      <AnimatedBackground />
-      <div className="w-full max-w-md space-y-6">
+      <LoginAnimation />
+      <div className="w-full max-w-md space-y-6 relative z-10 animate-scale-in">
         <div className="text-center space-y-2">
           <div className="text-3xl font-bold tracking-tight flex items-center justify-center gap-2">
             <span className="text-foreground">bc.</span>
@@ -84,7 +85,7 @@ const Auth = () => {
           </p>
         </div>
 
-        <Card className="border-border/50 shadow-lg">
+        <Card className="border-border/50 shadow-lg backdrop-blur-sm bg-card/95 hover-glow transition-glow">
           <CardHeader>
             <CardTitle className="text-center">Get Started</CardTitle>
             <CardDescription className="text-center">
@@ -166,8 +167,11 @@ const Auth = () => {
           </CardContent>
         </Card>
 
-        <div className="text-center text-sm text-muted-foreground">
-          <p>Secure authentication powered by Supabase</p>
+        <div className="text-center space-y-3">
+          <p className="text-sm text-muted-foreground">
+            Secure authentication powered by Supabase
+          </p>
+          <CreateAdminButton />
         </div>
       </div>
     </div>
