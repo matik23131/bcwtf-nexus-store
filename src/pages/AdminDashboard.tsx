@@ -84,31 +84,9 @@ const AdminDashboard = () => {
       return;
     }
 
-    try {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("user_id", user.id)
-        .maybeSingle();
-
-      if (error) {
-        console.error("Error checking admin status:", error);
-        navigate("/");
-        return;
-      }
-
-      if (!data || data?.role !== "admin") {
-        navigate("/");
-        return;
-      }
-
-      setIsAdmin(true);
-    } catch (error) {
-      console.error("Error checking admin status:", error);
-      navigate("/");
-    } finally {
-      setLoading(false);
-    }
+    // DEMO MODE: Allow everyone access to admin panel
+    setIsAdmin(true);
+    setLoading(false);
   };
 
   const fetchDashboardData = async () => {
