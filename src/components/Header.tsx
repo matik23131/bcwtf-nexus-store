@@ -40,6 +40,9 @@ const Header = () => {
             <Button variant="ghost" asChild>
               <Link to="/reviews">Reviews</Link>
             </Button>
+            <Button variant="ghost" asChild>
+              <Link to="/spin">Daily Spin</Link>
+            </Button>
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -51,6 +54,11 @@ const Header = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link to="/orders" className="flex items-center gap-2">
+                      My Orders
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/admin" className="flex items-center gap-2">
                       Admin Panel
@@ -97,9 +105,15 @@ const Header = () => {
               <Button variant="ghost" asChild className="w-full justify-start">
                 <Link to="/reviews">Reviews</Link>
               </Button>
+              <Button variant="ghost" asChild className="w-full justify-start">
+                <Link to="/spin">Daily Spin</Link>
+              </Button>
               <div className="flex flex-col space-y-2 pt-4">
                 {user ? (
                   <>
+                    <Link to="/orders">
+                      <Button variant="ghost" className="w-full">My Orders</Button>
+                    </Link>
                     <Link to="/admin">
                       <Button variant="ghost" className="w-full">Admin Panel</Button>
                     </Link>

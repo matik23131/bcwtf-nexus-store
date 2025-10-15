@@ -65,6 +65,63 @@ export type Database = {
         }
         Relationships: []
       }
+      coupons: {
+        Row: {
+          code: string
+          created_at: string
+          discount_percentage: number
+          expires_at: string
+          id: string
+          used: boolean
+          user_id: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          discount_percentage: number
+          expires_at: string
+          id?: string
+          used?: boolean
+          user_id: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          discount_percentage?: number
+          expires_at?: string
+          id?: string
+          used?: boolean
+          user_id?: string
+        }
+        Relationships: []
+      }
+      daily_spins: {
+        Row: {
+          created_at: string
+          id: string
+          last_spin_date: string
+          reward_type: string
+          reward_value: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_spin_date?: string
+          reward_type: string
+          reward_value: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_spin_date?: string
+          reward_type?: string
+          reward_value?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           amount: number

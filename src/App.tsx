@@ -11,6 +11,8 @@ import Status from "./pages/Status";
 import Reviews from "./pages/Reviews";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
+import Orders from "./pages/Orders";
+import Spin from "./pages/Spin";
 import NotFound from "./pages/NotFound";
 import ProductDetailView from "./components/ProductDetailView";
 
@@ -29,6 +31,8 @@ const App = () => (
               <Route path="/products" element={<Products />} />
               <Route path="/status" element={<Status />} />
               <Route path="/reviews" element={<Reviews />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/spin" element={<Spin />} />
               <Route path="/product/:id" element={<ProductDetailView />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin/*" element={<AdminDashboard />} />
