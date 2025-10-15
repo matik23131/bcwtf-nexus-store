@@ -27,13 +27,19 @@ const CreateAdminButton = () => {
           throw signUpError;
         }
       } else if (signUpData.user) {
+        // Wait a bit for the profile trigger to create the profile
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
         // Update profile to admin role
         const { error: profileError } = await supabase
           .from("profiles")
           .update({ role: "admin" })
           .eq("user_id", signUpData.user.id);
 
-        if (profileError) throw profileError;
+        if (profileError) {
+          console.error("Profile error:", profileError);
+          throw profileError;
+        }
 
         toast({
           title: "Admin account created!",

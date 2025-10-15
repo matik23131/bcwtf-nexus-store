@@ -89,9 +89,15 @@ const AdminDashboard = () => {
         .from("profiles")
         .select("role")
         .eq("user_id", user.id)
-        .single();
+        .maybeSingle();
 
-      if (error || data?.role !== "admin") {
+      if (error) {
+        console.error("Error checking admin status:", error);
+        navigate("/");
+        return;
+      }
+
+      if (!data || data?.role !== "admin") {
         navigate("/");
         return;
       }
