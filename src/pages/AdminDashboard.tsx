@@ -79,12 +79,7 @@ const AdminDashboard = () => {
   }, [isAdmin]);
 
   const checkAdminStatus = async () => {
-    if (!user) {
-      navigate("/auth");
-      return;
-    }
-
-    // DEMO MODE: Allow everyone access to admin panel
+    // DEMO MODE: No login required, allow everyone access
     setIsAdmin(true);
     setLoading(false);
   };
