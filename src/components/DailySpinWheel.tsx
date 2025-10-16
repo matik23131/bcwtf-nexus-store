@@ -1,35 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Gift, Sparkles } from "lucide-react";
+import { Gift, Sparkles, Zap } from "lucide-react";
 
 interface SpinResult {
   type: string;
   value: number;
   label: string;
+  rarity: "common" | "rare" | "epic" | "legendary";
 }
 
 const DailySpinWheel = () => {
   const { user } = useAuth();
   const [canSpin, setCanSpin] = useState(false);
   const [spinning, setSpinning] = useState(false);
-  const [rotation, setRotation] = useState(0);
+  const [offset, setOffset] = useState(0);
   const [lastSpin, setLastSpin] = useState<Date | null>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
 
-  // Rigged rewards - weighted probabilities
-  const rewards: SpinResult[] = [
-    { type: "discount", value: 5, label: "5% OFF" },
-    { type: "discount", value: 10, label: "10% OFF" },
-    { type: "discount", value: 5, label: "5% OFF" },
-    { type: "discount", value: 15, label: "15% OFF" },
-    { type: "discount", value: 5, label: "5% OFF" },
-    { type: "discount", value: 20, label: "20% OFF" },
-    { type: "discount", value: 5, label: "5% OFF" },
-    { type: "discount", value: 25, label: "25% OFF" },
+  // Rewards with rarity tiers (for visual styling)
+  const baseRewards: SpinResult[] = [
+    { type: "discount", value: 5, label: "5% OFF", rarity: "common" },
+    { type: "discount", value: 10, label: "10% OFF", rarity: "rare" },
+    { type: "discount", value: 15, label: "15% OFF", rarity: "epic" },
+    { type: "discount", value: 20, label: "20% OFF", rarity: "legendary" },
+    { type: "discount", value: 25, label: "25% OFF", rarity: "legendary" },
   ];
+
+  // Create a long strip by repeating rewards
+  const rewards = Array(30).fill(baseRewards).flat();
 
   useEffect(() => {
     if (user) {
@@ -68,10 +70,30 @@ const DailySpinWheel = () => {
   const getRiggedReward = (): SpinResult => {
     // Rigged logic: 70% chance for 5%, 20% for 10%, 8% for 15%, 2% for higher
     const random = Math.random();
-    if (random < 0.7) return rewards[0]; // 5%
-    if (random < 0.9) return rewards[1]; // 10%
-    if (random < 0.98) return rewards[3]; // 15%
-    return rewards[5]; // 20%
+    if (random < 0.7) return baseRewards[0]; // 5%
+    if (random < 0.9) return baseRewards[1]; // 10%
+    if (random < 0.98) return baseRewards[2]; // 15%
+    return baseRewards[3]; // 20%
+  };
+
+  const getRarityColor = (rarity: string) => {
+    switch (rarity) {
+      case "common": return "from-gray-500 to-gray-600";
+      case "rare": return "from-blue-500 to-blue-600";
+      case "epic": return "from-purple-500 to-purple-600";
+      case "legendary": return "from-yellow-500 to-orange-600";
+      default: return "from-gray-500 to-gray-600";
+    }
+  };
+
+  const getRarityGlow = (rarity: string) => {
+    switch (rarity) {
+      case "common": return "shadow-gray-500/50";
+      case "rare": return "shadow-blue-500/50";
+      case "epic": return "shadow-purple-500/50";
+      case "legendary": return "shadow-yellow-500/50";
+      default: return "shadow-gray-500/50";
+    }
   };
 
   const handleSpin = async () => {
@@ -79,11 +101,21 @@ const DailySpinWheel = () => {
 
     setSpinning(true);
     const reward = getRiggedReward();
-    const rewardIndex = rewards.findIndex(r => r.value === reward.value && r.type === reward.type);
-    const segmentAngle = 360 / rewards.length;
-    const targetRotation = 360 * 5 + (rewardIndex * segmentAngle) + (segmentAngle / 2);
     
-    setRotation(targetRotation);
+    // Find a matching reward in the strip (prefer middle-end of strip)
+    const matchingIndices = rewards
+      .map((r, i) => (r.value === reward.value && r.type === reward.type ? i : -1))
+      .filter(i => i > rewards.length * 0.6 && i < rewards.length * 0.8);
+    
+    const targetIndex = matchingIndices[Math.floor(Math.random() * matchingIndices.length)];
+    const itemWidth = 180; // Width of each item card
+    const centerOffset = window.innerWidth / 2 - itemWidth / 2;
+    const targetOffset = -(targetIndex * itemWidth - centerOffset);
+    
+    // Add extra spins for effect
+    const finalOffset = targetOffset - (rewards.length * 0.3 * itemWidth);
+    
+    setOffset(finalOffset);
 
     setTimeout(async () => {
       try {
@@ -127,92 +159,68 @@ const DailySpinWheel = () => {
       } finally {
         setSpinning(false);
       }
-    }, 3000);
+    }, 5000); // Longer animation time
   };
 
   return (
-    <Card className="max-w-2xl mx-auto bg-gradient-to-br from-background via-background to-primary/5 border-primary/20">
-      <CardHeader className="text-center space-y-2">
-        <CardTitle className="flex items-center justify-center gap-2 text-3xl font-bold">
-          <Sparkles className="w-6 h-6 text-primary animate-pulse" />
-          Daily Spin Wheel
-          <Sparkles className="w-6 h-6 text-primary animate-pulse" />
+    <Card className="max-w-5xl mx-auto bg-gradient-to-br from-background via-background to-primary/5 border-primary/20 overflow-hidden">
+      <CardHeader className="text-center space-y-2 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10">
+        <CardTitle className="flex items-center justify-center gap-3 text-4xl font-bold">
+          <Zap className="w-8 h-8 text-primary animate-pulse" />
+          Daily Case Opening
+          <Zap className="w-8 h-8 text-primary animate-pulse" />
         </CardTitle>
         <CardDescription className="text-base">
-          Spin once daily for exclusive discounts!
+          Open your daily case for exclusive discount codes!
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8 pb-8">
-        {/* Wheel Container */}
-        <div className="relative w-80 h-80 mx-auto">
-          {/* Outer glow ring */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-primary blur-xl opacity-50 animate-pulse" />
+      
+      <CardContent className="space-y-8 pb-8 pt-8">
+        {/* Case Opening Strip */}
+        <div className="relative h-64 bg-gradient-to-b from-background/50 to-primary/5 rounded-lg overflow-hidden border-2 border-primary/30">
+          {/* Center indicator line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-primary to-transparent z-20 shadow-lg shadow-primary/50" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary blur-sm z-20" />
           
-          {/* Wheel */}
-          <div className="relative w-full h-full">
-            <svg
-              viewBox="0 0 400 400"
-              className="w-full h-full transition-transform duration-[4000ms] ease-out"
-              style={{ transform: `rotate(${rotation}deg)` }}
-            >
-              {/* Wheel segments */}
-              {rewards.map((reward, index) => {
-                const angle = (360 / rewards.length) * index;
-                const nextAngle = (360 / rewards.length) * (index + 1);
-                const isEven = index % 2 === 0;
+          {/* Reward strip */}
+          <div 
+            ref={stripRef}
+            className="absolute top-1/2 -translate-y-1/2 flex gap-4 py-8 px-8 transition-transform duration-[5000ms] ease-out"
+            style={{ 
+              transform: `translateX(${offset}px)`,
+              willChange: 'transform'
+            }}
+          >
+            {rewards.map((reward, index) => (
+              <div
+                key={index}
+                className={`flex-shrink-0 w-40 h-48 rounded-lg bg-gradient-to-br ${getRarityColor(reward.rarity)} 
+                  border-2 border-white/20 shadow-xl ${getRarityGlow(reward.rarity)} 
+                  flex flex-col items-center justify-center gap-3 relative overflow-hidden
+                  ${spinning ? 'blur-[1px]' : ''}`}
+              >
+                {/* Shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent" />
                 
-                // Calculate path for segment
-                const startAngle = (angle - 90) * (Math.PI / 180);
-                const endAngle = (nextAngle - 90) * (Math.PI / 180);
-                const x1 = 200 + 190 * Math.cos(startAngle);
-                const y1 = 200 + 190 * Math.sin(startAngle);
-                const x2 = 200 + 190 * Math.cos(endAngle);
-                const y2 = 200 + 190 * Math.sin(endAngle);
+                <Gift className="w-12 h-12 text-white drop-shadow-lg" />
+                <div className="text-center z-10">
+                  <div className="text-2xl font-bold text-white drop-shadow-lg">
+                    {reward.label}
+                  </div>
+                  <div className="text-xs text-white/80 uppercase tracking-wider font-semibold">
+                    {reward.rarity}
+                  </div>
+                </div>
                 
-                const path = `M 200 200 L ${x1} ${y1} A 190 190 0 0 1 ${x2} ${y2} Z`;
-                
-                // Calculate text position
-                const textAngle = (angle + nextAngle) / 2;
-                const textAngleRad = (textAngle - 90) * (Math.PI / 180);
-                const textX = 200 + 120 * Math.cos(textAngleRad);
-                const textY = 200 + 120 * Math.sin(textAngleRad);
-                
-                return (
-                  <g key={index}>
-                    <path
-                      d={path}
-                      fill={isEven ? "hsl(var(--primary) / 0.9)" : "hsl(var(--accent) / 0.9)"}
-                      stroke="hsl(var(--background))"
-                      strokeWidth="2"
-                    />
-                    <text
-                      x={textX}
-                      y={textY}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="fill-primary-foreground font-bold text-xl"
-                      transform={`rotate(${textAngle}, ${textX}, ${textY})`}
-                    >
-                      {reward.label}
-                    </text>
-                  </g>
-                );
-              })}
-              
-              {/* Center circle */}
-              <circle cx="200" cy="200" r="50" fill="hsl(var(--background))" stroke="hsl(var(--primary))" strokeWidth="4" />
-            </svg>
-            
-            {/* Center icon */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-              <Gift className="w-12 h-12 text-primary animate-bounce" />
-            </div>
+                {/* Rarity indicator */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/30" />
+              </div>
+            ))}
           </div>
 
-          {/* Pointer arrow */}
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-            <div className="w-0 h-0 border-l-[20px] border-r-[20px] border-t-[30px] border-t-primary border-l-transparent border-r-transparent drop-shadow-lg" />
-          </div>
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
         </div>
 
         {/* Spin Button */}
@@ -220,28 +228,39 @@ const DailySpinWheel = () => {
           <Button
             onClick={handleSpin}
             disabled={!canSpin || spinning}
-            className="w-full h-14 text-lg font-bold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/50 transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+            className="w-full h-16 text-xl font-bold bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 shadow-lg shadow-primary/50 transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 relative overflow-hidden group"
             size="lg"
           >
+            {/* Animated background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            
             {spinning ? (
               <>
-                <Sparkles className="w-5 h-5 mr-2 animate-spin" />
-                Spinning...
+                <Sparkles className="w-6 h-6 mr-2 animate-spin" />
+                Opening Case...
               </>
             ) : canSpin ? (
               <>
-                <Gift className="w-5 h-5 mr-2" />
-                Spin Now!
+                <Gift className="w-6 h-6 mr-2" />
+                Open Case!
               </>
             ) : (
-              "Come back tomorrow!"
+              <>
+                <Sparkles className="w-6 h-6 mr-2" />
+                Come back tomorrow!
+              </>
             )}
           </Button>
 
           {lastSpin && !canSpin && (
-            <p className="text-center text-sm text-muted-foreground bg-muted/50 rounded-lg p-3">
-              Last spin: {lastSpin.toLocaleDateString()} at {lastSpin.toLocaleTimeString()}
-            </p>
+            <div className="text-center p-4 bg-muted/50 rounded-lg border border-primary/20">
+              <p className="text-sm text-muted-foreground">
+                Last case opened: {lastSpin.toLocaleDateString()} at {lastSpin.toLocaleTimeString()}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Next case available in: {Math.ceil((24 - (Date.now() - lastSpin.getTime()) / (1000 * 60 * 60)))} hours
+              </p>
+            </div>
           )}
         </div>
       </CardContent>
