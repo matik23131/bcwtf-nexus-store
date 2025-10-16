@@ -131,76 +131,119 @@ const DailySpinWheel = () => {
   };
 
   return (
-    <Card className="max-w-md mx-auto">
-      <CardHeader className="text-center">
-        <CardTitle className="flex items-center justify-center gap-2">
-          <Sparkles className="w-5 h-5 text-neon-pink" />
+    <Card className="max-w-2xl mx-auto bg-gradient-to-br from-background via-background to-primary/5 border-primary/20">
+      <CardHeader className="text-center space-y-2">
+        <CardTitle className="flex items-center justify-center gap-2 text-3xl font-bold">
+          <Sparkles className="w-6 h-6 text-primary animate-pulse" />
           Daily Spin Wheel
-          <Sparkles className="w-5 h-5 text-neon-pink" />
+          <Sparkles className="w-6 h-6 text-primary animate-pulse" />
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="text-base">
           Spin once daily for exclusive discounts!
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="relative w-64 h-64 mx-auto">
+      <CardContent className="space-y-8 pb-8">
+        {/* Wheel Container */}
+        <div className="relative w-80 h-80 mx-auto">
+          {/* Outer glow ring */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-primary blur-xl opacity-50 animate-pulse" />
+          
           {/* Wheel */}
-          <div
-            className="w-full h-full rounded-full border-4 border-neon-pink shadow-lg shadow-neon-pink/50 relative overflow-hidden transition-transform duration-3000 ease-out"
-            style={{ transform: `rotate(${rotation}deg)` }}
-          >
-            {rewards.map((reward, index) => {
-              const angle = (360 / rewards.length) * index;
-              return (
-                <div
-                  key={index}
-                  className="absolute w-full h-full flex items-center justify-center"
-                  style={{
-                    transform: `rotate(${angle}deg)`,
-                    transformOrigin: "50% 50%",
-                  }}
-                >
-                  <div
-                    className={`absolute top-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[80px] border-r-[80px] border-t-[130px] ${
-                      index % 2 === 0
-                        ? "border-t-neon-pink/80"
-                        : "border-t-purple-500/80"
-                    } border-l-transparent border-r-transparent`}
-                  />
-                  <span
-                    className="absolute top-8 left-1/2 -translate-x-1/2 text-white font-bold text-sm"
-                    style={{ transform: "rotate(0deg)" }}
-                  >
-                    {reward.label}
-                  </span>
-                </div>
-              );
-            })}
+          <div className="relative w-full h-full">
+            <svg
+              viewBox="0 0 400 400"
+              className="w-full h-full transition-transform duration-[4000ms] ease-out"
+              style={{ transform: `rotate(${rotation}deg)` }}
+            >
+              {/* Wheel segments */}
+              {rewards.map((reward, index) => {
+                const angle = (360 / rewards.length) * index;
+                const nextAngle = (360 / rewards.length) * (index + 1);
+                const isEven = index % 2 === 0;
+                
+                // Calculate path for segment
+                const startAngle = (angle - 90) * (Math.PI / 180);
+                const endAngle = (nextAngle - 90) * (Math.PI / 180);
+                const x1 = 200 + 190 * Math.cos(startAngle);
+                const y1 = 200 + 190 * Math.sin(startAngle);
+                const x2 = 200 + 190 * Math.cos(endAngle);
+                const y2 = 200 + 190 * Math.sin(endAngle);
+                
+                const path = `M 200 200 L ${x1} ${y1} A 190 190 0 0 1 ${x2} ${y2} Z`;
+                
+                // Calculate text position
+                const textAngle = (angle + nextAngle) / 2;
+                const textAngleRad = (textAngle - 90) * (Math.PI / 180);
+                const textX = 200 + 120 * Math.cos(textAngleRad);
+                const textY = 200 + 120 * Math.sin(textAngleRad);
+                
+                return (
+                  <g key={index}>
+                    <path
+                      d={path}
+                      fill={isEven ? "hsl(var(--primary) / 0.9)" : "hsl(var(--accent) / 0.9)"}
+                      stroke="hsl(var(--background))"
+                      strokeWidth="2"
+                    />
+                    <text
+                      x={textX}
+                      y={textY}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="fill-primary-foreground font-bold text-xl"
+                      transform={`rotate(${textAngle}, ${textX}, ${textY})`}
+                    >
+                      {reward.label}
+                    </text>
+                  </g>
+                );
+              })}
+              
+              {/* Center circle */}
+              <circle cx="200" cy="200" r="50" fill="hsl(var(--background))" stroke="hsl(var(--primary))" strokeWidth="4" />
+            </svg>
+            
+            {/* Center icon */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <Gift className="w-12 h-12 text-primary animate-bounce" />
+            </div>
           </div>
 
-          {/* Center button */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-background rounded-full border-4 border-neon-pink flex items-center justify-center shadow-lg">
-            <Gift className="w-8 h-8 text-neon-pink" />
+          {/* Pointer arrow */}
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+            <div className="w-0 h-0 border-l-[20px] border-r-[20px] border-t-[30px] border-t-primary border-l-transparent border-r-transparent drop-shadow-lg" />
           </div>
-
-          {/* Pointer */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-0 h-0 border-l-[15px] border-r-[15px] border-b-[25px] border-b-neon-pink border-l-transparent border-r-transparent z-10" />
         </div>
 
-        <Button
-          onClick={handleSpin}
-          disabled={!canSpin || spinning}
-          className="w-full"
-          size="lg"
-        >
-          {spinning ? "Spinning..." : canSpin ? "Spin Now!" : "Come back tomorrow!"}
-        </Button>
+        {/* Spin Button */}
+        <div className="space-y-4">
+          <Button
+            onClick={handleSpin}
+            disabled={!canSpin || spinning}
+            className="w-full h-14 text-lg font-bold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/50 transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+            size="lg"
+          >
+            {spinning ? (
+              <>
+                <Sparkles className="w-5 h-5 mr-2 animate-spin" />
+                Spinning...
+              </>
+            ) : canSpin ? (
+              <>
+                <Gift className="w-5 h-5 mr-2" />
+                Spin Now!
+              </>
+            ) : (
+              "Come back tomorrow!"
+            )}
+          </Button>
 
-        {lastSpin && !canSpin && (
-          <p className="text-center text-sm text-muted-foreground">
-            Last spin: {lastSpin.toLocaleDateString()}
-          </p>
-        )}
+          {lastSpin && !canSpin && (
+            <p className="text-center text-sm text-muted-foreground bg-muted/50 rounded-lg p-3">
+              Last spin: {lastSpin.toLocaleDateString()} at {lastSpin.toLocaleTimeString()}
+            </p>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
